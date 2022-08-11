@@ -1,3 +1,4 @@
+const songs = require('../data/songs');
 const exampleSongData = require('../data/songs');
 const exampleVoteData = require('../data/votes');
 
@@ -34,7 +35,12 @@ const exampleVoteData = require('../data/votes');
  * > 1680
  */
 
-function allSongsRuntimeSum(exampleSongData) {}
+function allSongsRuntimeSum(exampleSongData) {
+  return exampleSongData.reduce((acc, song) => {
+    acc += song.runtimeInSeconds
+    return acc
+  }, 0)
+}
 
 // UNCOMMENT THE CONSOLE.LOG LINE BELOW TO TEST
 // run `node src/01-reduce-no-tests.js`
@@ -62,7 +68,16 @@ function allSongsRuntimeSum(exampleSongData) {}
   }
  */
 
-function getMaxRuntime(exampleSongData) {}
+function getMaxRuntime(songs) {
+  let longest = songs.reduce((acc, el) => {
+    if (acc.runtimeInSeconds > el.runtimeInSeconds){
+      return acc
+    } else {
+      return el
+    }
+  })
+  return longest
+}
 
 // UNCOMMENT  THE CONSOLE.LOG LINE BELOW TO TEST
 // run `node src/01-reduce-no-tests.js`
@@ -92,11 +107,28 @@ function getMaxRuntime(exampleSongData) {}
 }
  */
 
-function countVotes(exampleVoteData) {}
+function countVotes(exampleVoteData) {
+  let countObj = {
+    'Pink Elephant' : 0,
+    'Kyona' : 0,
+    'In the Middle of Nowhere' : 0,
+    'undecided' : 0,
+    'Samui Sunrise' : 0
+
+  }
+  let count = exampleVoteData.reduce((acc, el) => {
+    if (!countObj[el.vote]){
+      countObj[el.vote] = 1
+    else {}
+      return count
+    }
+  })
+  return countObj
+}
 
 // UNCOMMENT THE CONSOLE.LOG LINE BELOW TO TEST
 // run `node src/01-reduce-no-tests.js`
 // look in terminal to see if you match the example
 // when you are done, comment line again
 
-// console.log(countVotes(exampleVoteData));
+console.log(countVotes(exampleVoteData));
